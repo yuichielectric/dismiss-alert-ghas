@@ -68,6 +68,8 @@
    var from = req.params.from;
    var to = req.params.to;
    var names = users.map(function(user){ return user.name; });
+   // TODO fix it
+   eval(from);
    res.send('users ' + names.slice(from, to + 1).join(', '));
  });
  
@@ -76,4 +78,12 @@
    app.listen(3000);
    console.log('Express started on port 3000');
  }
- 
+
+ app.get('/some/path', function(req, res) {
+  let url = req.param('url'),
+      host = urlLib.parse(url).host;
+  let regex = /^((www|beta).)?examplee.com/;
+  if (host.match(regex)) {
+      res.redirect(url);
+  }
+});
